@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "rs.onako2.placedownloader.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MinecraftClientMixin",
+    "MixinGlDebug"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

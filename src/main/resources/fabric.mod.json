@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "placedownloader",
+  "version": "${version}",
+  "name": "PlaceDownloader",
+  "description": "r/Place Downloader by Onako2",
+  "authors": [
+    "Onako2"
+  ],
+  "contributors": [
+    "valooost"
+  ],
+  "contact": {},
+  "license": "GPLv2",
+  "icon": "assets/placedownloader/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "rs.onako2.placedownloader.PlaceDownloaderClient"
+    ],
+    "modmenu": [
+      "rs.onako2.placedownloader.compat.modmenu.PlaceModMenu"
+    ]
+  },
+  "mixins": [
+    "placedownloader.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=1.21"
+  }
+}

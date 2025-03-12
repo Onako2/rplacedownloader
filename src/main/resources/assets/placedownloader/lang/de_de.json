@@ -1,0 +1,14 @@
+{
+  "placedownloader.schematics.downloading": "Lade %s runter.",
+  "placedownloader.schematics.downloaded": "Erfolgreich %s runtergeladen!",
+  "placedownloader.schematics.error": "Runterladen für %s fehlgeschlagen! %s",
+  "placedownloader.schematics.creating.error": "Dateierstellung für %s fehlgeschlagen! %s",
+  "placedownloader.privacy.screen": "Datenerhebungserklärung",
+  "placedownloader.privacy.screen.full": "Erlaube Erhebung von allen Daten",
+  "placedownloader.privacy.screen.full.tooltip": "Erlaube, dass deine Koordinaten an Server geschickt werden, die die Schematics bereitstellen, damit Statistiken erstellt werden können.",
+  "placedownloader.privacy.screen.necessary": "Erlaube nur die Nötigste Erhebung",
+  "placedownloader.privacy.screen.necessary.tooltip": "Der Schematics-Server erhält nur den Nutzername und die Information, dass die Modifikation verwendet wird. Der Server kann den Nutzernamen dazu verwenden, um Schematics vor Diebstahl zu schützen.",
+  "placedownloader.privacy.screen.text.1": "Diese Modifikation (PlaceDownloader) erhebt Daten für Statistik und für den Schutz von Schematics.",
+  "placedownloader.privacy.screen.text.2": "Um dies zu tun brauchen wir Ihre Zustimmung.",
+  "placedownloader.privacy.screen.text.3": "Man kann sich jederzeit über den \"/placeprivacy\" Befehl umentscheiden, wie die zukünftige Erhebung geschehen soll!"
+}

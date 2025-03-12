@@ -1,0 +1,6 @@
+{
+  "placedownloader.schematics.downloading": "Descargando %s.",
+  "placedownloader.schematics.downloaded": "Descargado sucesivamente %s!",
+  "placedownloader.schematics.error": "Fallado la descarga de %s! %s",
+  "placedownloader.schematics.creating.error": "Fallado crear fila para  %s! %s"
+}

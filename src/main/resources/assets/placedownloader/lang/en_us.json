@@ -1,0 +1,14 @@
+{
+  "placedownloader.schematics.downloading": "Downloading %s.",
+  "placedownloader.schematics.downloaded": "Successfully downloaded %s!",
+  "placedownloader.schematics.error": "Failed Download for %s! %s",
+  "placedownloader.schematics.creating.error": "Failed creating file for %s! %s",
+  "placedownloader.privacy.screen": "Data collection agreement",
+  "placedownloader.privacy.screen.full": "Allow all data collection",
+  "placedownloader.privacy.screen.full.tooltip": "Allow that your coordinates get sent to the server hosting the schematics which allows statistics",
+  "placedownloader.privacy.screen.necessary": "Only allow necessary data collection",
+  "placedownloader.privacy.screen.necessary.tooltip": "The schematics server will only receive your username and that indirectly that you are using this mod. The server can verify your identity with this data in order to protect your schematics from being stolen.",
+  "placedownloader.privacy.screen.text.1": "This mod (PlaceDownloader) collects data to create statistics and enable some features for protecting schematics.",
+  "placedownloader.privacy.screen.text.2": "In order to be able to collect statistics we need your permission to do so.",
+  "placedownloader.privacy.screen.text.3": "You can change your decision at any time by executing the \"/placeprivacy\" command!"
+}
