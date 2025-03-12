@@ -1,4 +1,5 @@
 {
+  "placedownloader.schematics.busy": "Can't execute the command because schematics are reloading! Try again later!",
   "placedownloader.schematics.downloading": "Downloading %s.",
   "placedownloader.schematics.downloaded": "Successfully downloaded %s!",
   "placedownloader.schematics.error": "Failed Download for %s! %s",

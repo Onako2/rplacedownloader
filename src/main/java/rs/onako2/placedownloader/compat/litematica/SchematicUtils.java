@@ -47,7 +47,8 @@ public class SchematicUtils {
     }
     
     public static void removePlacement(SchematicPlacement placement) {
-        placementManager.removeSchematicPlacement(placement, false);
+        placement.setEnabled(false);
+        placementManager.removeSchematicPlacement(placement, true);
     }
     
     public static boolean placementExists(String name, List<SchematicPlacement> placements) {

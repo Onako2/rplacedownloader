@@ -10,8 +10,20 @@
   "contributors": [
     "valooost"
   ],
-  "contact": {},
-  "license": "GPLv2",
+  "contact": {
+    "homepage": "https://github.com/Onako2/rplacedownloader",
+    "sources": "https://github.com/Onako2/rplacedownloader",
+    "issues": "https://github.com/Onako2/rplacedownloader/issues"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/NGw5ZGKgRt"
+      },
+      "update_checker": false
+    }
+  },
+  "license": "GPLv2.0",
   "icon": "assets/placedownloader/icon.png",
   "environment": "client",
   "entrypoints": {
@@ -28,6 +40,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": ">=1.21"
+    "minecraft": ">=1.21",
+    "litematica": "*"
   }
 }

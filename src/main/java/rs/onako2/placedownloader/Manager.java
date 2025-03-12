@@ -38,6 +38,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -48,11 +49,18 @@ import static rs.onako2.placedownloader.PlaceDownloaderClient.servers;
 
 public class Manager {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
+    public static boolean mayExecute = true;
     
     public static void refresh() {
         
         PlayerEntity player = mc.player;
+        
         if (player == null) {
+            return;
+        }
+        
+        if (!mayExecute) {
+            player.sendMessage(Text.translatable("placedownloader.schematics.busy"), false);
             return;
         }
         
@@ -61,6 +69,7 @@ public class Manager {
         }
         
         CompletableFuture.runAsync(() -> {
+            mayExecute = false;
             servers.forEach(serverEntry -> {
                 if (Objects.equals(serverEntry.url, "https://example.local/example.json")) return;
                 URL urlServer;
@@ -94,6 +103,7 @@ public class Manager {
                         } catch (IOException e) {
                             player.sendMessage(Text.translatable("placedownloader.schematics.creating.error", schematicEntry.name, e.getMessage()), false);
                         }
+                        
                         if (file.length() != schematicEntry.size) {
                             player.sendMessage(Text.translatable("placedownloader.schematics.downloading", schematicEntry.name), false);
                             try {
@@ -108,18 +118,24 @@ public class Manager {
                                 e.printStackTrace();
                                 player.sendMessage(Text.translatable("placedownloader.schematics.error", schematicEntry.name, e.getMessage()), false);
                             }
-                            
                         }
+                        
+                        List<Integer> toBeRemoved = new ArrayList<>();
                         
                         List<SchematicPlacement> schematicPlacements = new java.util.ArrayList<>(List.copyOf(SchematicUtils.getPlacements()));
                         if (mayLoad) {
                             schematicPlacements.forEach(placement -> {
                                 if (placement != null && placement.getName().equals(schematicEntry.name)) {
                                     SchematicUtils.removePlacement(placement);
-                                    schematicPlacements.remove(placement);
+                                    toBeRemoved.add(schematicPlacements.indexOf(placement));
                                 }
                             });
                         }
+                        
+                        toBeRemoved.forEach(index -> {
+                            int indexToRemove = index;
+                            schematicPlacements.remove(indexToRemove);
+                        });
                         
                         if (schematicEntry.autoload && (!SchematicUtils.placementExists(schematicEntry.name, schematicPlacements) || mayLoad)) {
                             LitematicaSchematic schematic = SchematicUtils.loadSchematic(new File(PlaceDownloaderClient.PATH).getAbsoluteFile(), schematicEntry.name + "." + schematicEntry.type);
@@ -134,7 +150,9 @@ public class Manager {
                 }
                 
             });
+            mayExecute = true;
         }).exceptionally(ex -> {
+            mayExecute = true;
             player.sendMessage(Text.literal("Failed to download: " + ex.getMessage()), false);
             ex.printStackTrace();
             return null;

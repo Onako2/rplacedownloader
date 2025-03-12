@@ -1,4 +1,5 @@
 {
+  "placedownloader.schematics.busy": "Kann den Befehl nicht ausführen, weil Schematics neu geladen werden! Versuche es später nochmal!",
   "placedownloader.schematics.downloading": "Lade %s runter.",
   "placedownloader.schematics.downloaded": "Erfolgreich %s runtergeladen!",
   "placedownloader.schematics.error": "Runterladen für %s fehlgeschlagen! %s",
