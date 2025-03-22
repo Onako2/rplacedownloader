@@ -33,7 +33,7 @@ import static rs.onako2.placedownloader.PlaceDownloaderClient.gson;
 
 public class PrivacyUtils {
     
-    private static final String BASE_AGENT = "PlaceDownloader ({}, x:{}, z:{}) by Onako2";
+    private static final String BASE_AGENT = "PlaceDownloader (%s, x:%s, z:%s) by Onako2";
     public static int allowCoords = -1;
     
     public static String getUserAgent(String username, int x, int z) {
