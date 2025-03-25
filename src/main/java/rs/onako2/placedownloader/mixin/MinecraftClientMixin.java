@@ -33,6 +33,8 @@ import rs.onako2.placedownloader.PlaceDownloaderClient;
 import rs.onako2.placedownloader.privacy.PrivacyScreen;
 import rs.onako2.placedownloader.privacy.PrivacyUtils;
 
+import static rs.onako2.placedownloader.compat.litematica.SchematicUtils.placementManager;
+
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
     @Shadow
@@ -48,6 +50,9 @@ public abstract class MinecraftClientMixin {
             this.setScreen(new PrivacyScreen(currentScreen));
         }
         if (screen instanceof ReconfiguringScreen || screen instanceof DownloadingTerrainScreen) {
+            // remove all schematics that might not be used anymore because we will readd them anyways
+            placementManager.getAllSchematicsPlacements().removeAll(placementManager.getAllSchematicsPlacements());
+            // schedule loading the schematics to 10s
             PlaceDownloaderClient.timer = 5800;
         }
     }
