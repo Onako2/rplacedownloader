@@ -23,6 +23,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rs.onako2.placedownloader.json.SettingsJson;
 import rs.onako2.placedownloader.json.SettingsServerEntry;
 import rs.onako2.placedownloader.privacy.PrivacyScreen;
@@ -45,6 +47,7 @@ public class PlaceDownloaderClient implements ClientModInitializer {
     public static int timer;
     public static boolean setScreen = false;
     public static List<SettingsServerEntry> servers;
+    public static final Logger LOGGER = LoggerFactory.getLogger("placedownloader");
     
     @Override
     public void onInitializeClient() {

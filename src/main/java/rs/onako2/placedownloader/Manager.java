@@ -50,6 +50,7 @@ import static rs.onako2.placedownloader.PlaceDownloaderClient.servers;
 public class Manager {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
     public static boolean mayExecute = true;
+    private static boolean hasDownloaded;
     
     public static void refresh() {
         
@@ -67,6 +68,8 @@ public class Manager {
         if (mc.player.clientWorld.getScoreboard().getScoreHolderObjectives(ScoreHolder.fromName("Fortschritt")).isEmpty()) {
             return;
         }
+
+        hasDownloaded = false;
         
         CompletableFuture.runAsync(() -> {
             mayExecute = false;
@@ -91,7 +94,6 @@ public class Manager {
                     
                     SchematicJson schematicJson = gson.fromJson(json, SchematicJson.class);
                     SchematicEntry[] schematics = schematicJson.schematics;
-                    
                     Arrays.stream(schematics).toList().forEach(schematicEntry -> {
                         
                         boolean mayLoad = false;
@@ -105,7 +107,12 @@ public class Manager {
                         }
                         
                         if (file.length() != schematicEntry.size) {
-                            player.sendMessage(Text.translatable("placedownloader.schematics.downloading", schematicEntry.name), false);
+                            if (!hasDownloaded) {
+                                player.sendMessage(Text.translatable("placedownloader.schematics.downloading"), true);
+                                hasDownloaded = true;
+                            }
+
+                            PlaceDownloaderClient.LOGGER.info((Text.translatable("placedownloader.schematics.downloading.schematic", schematicEntry.name).getString()));
                             try {
                                 URL url = new URI(schematicEntry.url).toURL();
                                 HttpURLConnection con = download(player, url);
@@ -113,7 +120,7 @@ public class Manager {
                                 Files.write(file.toPath(), con.getInputStream().readAllBytes());
                                 
                                 mayLoad = true;
-                                player.sendMessage(Text.translatable("placedownloader.schematics.downloaded", schematicEntry.name), false);
+                                PlaceDownloaderClient.LOGGER.info((Text.translatable("placedownloader.schematics.downloaded.schematic", schematicEntry.name).getString()));
                             } catch (IOException | URISyntaxException e) {
                                 e.printStackTrace();
                                 player.sendMessage(Text.translatable("placedownloader.schematics.error", schematicEntry.name, e.getMessage()), false);
@@ -151,6 +158,9 @@ public class Manager {
                 
             });
             mayExecute = true;
+            if (hasDownloaded) {
+                player.sendMessage(Text.translatable("placedownloader.schematics.downloaded"), true);
+            }
         }).exceptionally(ex -> {
             mayExecute = true;
             player.sendMessage(Text.literal("Failed to download: " + ex.getMessage()), false);

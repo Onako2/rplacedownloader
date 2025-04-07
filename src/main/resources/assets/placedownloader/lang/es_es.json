@@ -1,6 +1,8 @@
 {
-  "placedownloader.schematics.downloading": "Descargando %s.",
-  "placedownloader.schematics.downloaded": "Descargado sucesivamente %s!",
+  "placedownloader.schematics.busy": "Can't execute the command because schematics are reloading! Try again later!",
+  "placedownloader.schematics.downloading": "Descargando...",
+  "placedownloader.schematics.downloading.schematic": "Descargando %s.",
+  "placedownloader.schematics.downloaded.schematic": "Descargado sucesivamente %s!",
   "placedownloader.schematics.error": "Fallado la descarga de %s! %s",
   "placedownloader.schematics.creating.error": "Fallado crear fila para  %s! %s"
 }
