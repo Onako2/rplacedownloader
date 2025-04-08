@@ -4,15 +4,14 @@ Minecraft Mod developed by Onako2 for the Minecraft event "r/place" on GommeHD.n
 
 ## Features
 
-- Download and save r/place images from the Minecraft server.
-- Integration with Litematica for easy placement of downloaded images.
+- Automatic synchronization with a central server configured by you in a file!
+- Integration with Litematica for easy placement of downloaded schematics (It happens all automatically).
 - Mod menu support for easy configuration.
 
 ## Installation
 
-1. Download and install [Fabric Loader](https://fabricmc.net/use/).
-2. Download the latest release of the mod from the [releases page](https://github.com/Onako2/rplacedownloader/releases) (once they are available).
-3. Place the downloaded `.jar` file in the `mods` folder of your Minecraft directory.
+As this is a "private" mod, you will recieve instruction in how to configure this mod from your contact.  
+_TLDR: There is a config file generated_
 
 ## Usage
 
