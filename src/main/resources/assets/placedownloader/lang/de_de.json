@@ -1,8 +1,8 @@
 {
   "placedownloader.schematics.busy": "Kann den Befehl nicht ausführen, weil Schematics neu geladen werden! Versuche es später nochmal!",
-  "placedownloader.schematics.downloading": "Lade runter...",
+  "placedownloader.schematics.downloading": "Lade Schematics runter...",
   "placedownloader.schematics.downloading.schematic": "Lade %s runter.",
-  "placedownloader.schematics.downloaded": "Erfolgreicher Download!",
+  "placedownloader.schematics.downloaded": "Erfolgreich Schematics runtergeladen!",
   "placedownloader.schematics.downloaded.schematic": "Erfolgreich %s runtergeladen!",
   "placedownloader.schematics.error": "Runterladen für %s fehlgeschlagen! %s",
   "placedownloader.schematics.creating.error": "Dateierstellung für %s fehlgeschlagen! %s",

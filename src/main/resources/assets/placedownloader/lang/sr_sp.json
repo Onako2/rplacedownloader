@@ -1,8 +1,8 @@
 {
-  "placedownloader.schematics.downloading": "Скидам.",
+  "placedownloader.schematics.downloading": "Скидам шематику.",
   "placedownloader.schematics.downloading.schematic": "Скидам %s.",
   "placedownloader.schematics.downloaded.schematic": "Успешно скинуо %s!",
-  "placedownloader.schematics.downloaded": "Успешно скидање!",
+  "placedownloader.schematics.downloaded": "Успешно скинуо шематику!",
   "placedownloader.schematics.error": "Неуспешно скинуо %s! %s",
   "placedownloader.schematics.creating.error": "Нисам могао да креирам датотеку %s! %s"
 }

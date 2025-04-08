@@ -1,8 +1,8 @@
 {
   "placedownloader.schematics.busy": "Can't execute the command because schematics are reloading! Try again later!",
-  "placedownloader.schematics.downloading": "Downloading...",
+  "placedownloader.schematics.downloading": "Downloading schematics...",
   "placedownloader.schematics.downloading.schematic": "Downloading %s.",
-  "placedownloader.schematics.downloaded": "Successful download!",
+  "placedownloader.schematics.downloaded": "Successfull downloaded schematics!",
   "placedownloader.schematics.downloaded.schematic": "Successfully downloaded %s!",
   "placedownloader.schematics.error": "Failed Download for %s! %s",
   "placedownloader.schematics.creating.error": "Failed creating file for %s! %s",
