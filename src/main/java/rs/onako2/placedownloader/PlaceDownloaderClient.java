@@ -39,7 +39,7 @@ import java.util.List;
 import static rs.onako2.placedownloader.Manager.mc;
 
 public class PlaceDownloaderClient implements ClientModInitializer {
-    
+
     public static final String MOD_ID = "placedownloader";
     public static final String PATH = "placedownloader/";
     public static final File SETTINGS_FILE = new File(PATH + "settings.json");
@@ -48,35 +48,35 @@ public class PlaceDownloaderClient implements ClientModInitializer {
     public static boolean setScreen = false;
     public static List<SettingsServerEntry> servers;
     public static final Logger LOGGER = LoggerFactory.getLogger("placedownloader");
-    
+
     @Override
     public void onInitializeClient() {
-        
+
         File base = new File(PATH);
-        
+
         base.mkdirs();
-        
+
         try {
             if (SETTINGS_FILE.createNewFile()) {
-                
+
                 SettingsServerEntry[] servers = new SettingsServerEntry[]{
                         new SettingsServerEntry("https://example.local/example.json", "Example Server")
                 };
-                
+
                 SettingsJson defaultSettings = new SettingsJson(servers, 0, -1);
-                
+
                 Files.writeString(SETTINGS_FILE.toPath(), gson.toJson(defaultSettings, SettingsJson.class), StandardCharsets.UTF_8);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
+
         try {
             PrivacyUtils.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
+
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(
                     ClientCommandManager.literal("schematics").executes(context -> {
@@ -89,7 +89,7 @@ public class PlaceDownloaderClient implements ClientModInitializer {
                         return 0;
                     }));
         });
-        
+
         ClientTickEvents.END_WORLD_TICK.register(client -> {
             timer++;
             if (timer >= 6000) {

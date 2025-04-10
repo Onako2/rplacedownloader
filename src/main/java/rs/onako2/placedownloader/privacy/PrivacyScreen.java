@@ -32,19 +32,19 @@ public class PrivacyScreen extends Screen {
     public ButtonWidget button1;
     public ButtonWidget button2;
     private Screen parent;
-    
+
     public PrivacyScreen(Screen parent) {
         // The parameter is the title of the screen,
         // which will be narrated when you enter the screen.
         super(Text.translatable("placedownloader.privacy.screen"));
         this.parent = parent;
     }
-    
+
     public PrivacyScreen() {
         super(Text.translatable("placedownloader.privacy.screen"));
         this.parent = null;
     }
-    
+
     @Override
     protected void init() {
         button1 = ButtonWidget.builder(Text.translatable("placedownloader.privacy.screen.full"), button -> {
@@ -69,28 +69,28 @@ public class PrivacyScreen extends Screen {
                 .dimensions(width / 2 + 5, 20, 200, 20)
                 .tooltip(Tooltip.of(Text.translatable("placedownloader.privacy.screen.necessary.tooltip")))
                 .build();
-        
+
         addDrawableChild(button1);
         addDrawableChild(button2);
     }
-    
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(textRenderer, Text.translatable("placedownloader.privacy.screen.text.1"), width / 2, height / 4, 0xffffff);
-        
+
         context.drawCenteredTextWithShadow(textRenderer, Text.translatable("placedownloader.privacy.screen.text.2"), width / 2, height / 3, 0xffffff);
-        
+
         context.drawCenteredTextWithShadow(textRenderer, Text.translatable("placedownloader.privacy.screen.text.3"), width / 2, height / 2, 0xffffff);
     }
-    
-    
+
+
     public PrivacyScreen setParent(@Nullable Screen parent) {
         if (parent == null || parent.getClass() != this.getClass()) {
             this.parent = parent;
         }
-        
+
         return this;
     }
-    
+
 }

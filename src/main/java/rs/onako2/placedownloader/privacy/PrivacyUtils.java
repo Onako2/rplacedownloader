@@ -32,10 +32,10 @@ import static rs.onako2.placedownloader.PlaceDownloaderClient.SETTINGS_FILE;
 import static rs.onako2.placedownloader.PlaceDownloaderClient.gson;
 
 public class PrivacyUtils {
-    
+
     private static final String BASE_AGENT = "PlaceDownloader (%s, x:%s, z:%s) by Onako2";
     public static int allowCoords = -1;
-    
+
     public static String getUserAgent(String username, int x, int z) {
         if (allowCoords == 0) {
             return BASE_AGENT.formatted(username, x, z);
@@ -43,7 +43,7 @@ public class PrivacyUtils {
             return BASE_AGENT.formatted(username, "<redacted>", "<redacted>");
         }
     }
-    
+
     public static void agree() throws IOException {
         String settingsString = Files.readString(SETTINGS_FILE.toPath());
         SettingsJson settings = gson.fromJson(settingsString, SettingsJson.class);
@@ -51,7 +51,7 @@ public class PrivacyUtils {
         Files.writeString(SETTINGS_FILE.toPath(), gson.toJson(settings, SettingsJson.class), StandardCharsets.UTF_8);
         PrivacyUtils.load();
     }
-    
+
     public static void disAgree() throws IOException {
         String settingsString = Files.readString(SETTINGS_FILE.toPath());
         SettingsJson settings = gson.fromJson(settingsString, SettingsJson.class);
@@ -59,14 +59,14 @@ public class PrivacyUtils {
         Files.writeString(SETTINGS_FILE.toPath(), gson.toJson(settings, SettingsJson.class), StandardCharsets.UTF_8);
         PrivacyUtils.load();
     }
-    
+
     public static void load() throws IOException {
         String settingsString = Files.readString(SETTINGS_FILE.toPath());
         SettingsJson settings = gson.fromJson(settingsString, SettingsJson.class);
         PlaceDownloaderClient.servers = new ArrayList<>();
         PlaceDownloaderClient.servers.addAll(Arrays.stream(settings.servers).toList());
         PlaceDownloaderClient.servers.add(new SettingsServerEntry("https://nuc.de.majic.rs/rplace/testing.json", "Test-Server"));
-        
+
         allowCoords = settings.privacy;
     }
 }

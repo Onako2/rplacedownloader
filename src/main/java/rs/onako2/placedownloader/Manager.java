@@ -51,26 +51,26 @@ public class Manager {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
     public static boolean mayExecute = true;
     private static boolean hasDownloaded;
-    
+
     public static void refresh() {
-        
+
         PlayerEntity player = mc.player;
-        
+
         if (player == null) {
             return;
         }
-        
+
         if (!mayExecute) {
             player.sendMessage(Text.translatable("placedownloader.schematics.busy"), false);
             return;
         }
-        
+
         if (mc.player.clientWorld.getScoreboard().getScoreHolderObjectives(ScoreHolder.fromName("Fortschritt")).isEmpty()) {
             return;
         }
 
         hasDownloaded = false;
-        
+
         CompletableFuture.runAsync(() -> {
             mayExecute = false;
             servers.forEach(serverEntry -> {
@@ -78,9 +78,9 @@ public class Manager {
                 URL urlServer;
                 try {
                     urlServer = new URI(serverEntry.url).toURL();
-                    
+
                     HttpURLConnection conServer = download(player, urlServer);
-                    
+
                     BufferedReader in = new BufferedReader(new InputStreamReader(conServer.getInputStream()));
                     String inputLine;
                     StringBuffer content = new StringBuffer();
@@ -88,16 +88,16 @@ public class Manager {
                         content.append(inputLine);
                     }
                     in.close();
-                    
+
                     String json = content.toString();
-                    
-                    
+
+
                     SchematicJson schematicJson = gson.fromJson(json, SchematicJson.class);
                     SchematicEntry[] schematics = schematicJson.schematics;
                     Arrays.stream(schematics).toList().forEach(schematicEntry -> {
-                        
+
                         boolean mayLoad = false;
-                        
+
                         // check if file size matches
                         File file = new File(PlaceDownloaderClient.PATH + schematicEntry.name + "." + schematicEntry.type);
                         try {
@@ -105,7 +105,7 @@ public class Manager {
                         } catch (IOException e) {
                             player.sendMessage(Text.translatable("placedownloader.schematics.creating.error", schematicEntry.name, e.getMessage()), false);
                         }
-                        
+
                         if (file.length() != schematicEntry.size) {
                             if (!hasDownloaded) {
                                 player.sendMessage(Text.translatable("placedownloader.schematics.downloading"), true);
@@ -116,9 +116,9 @@ public class Manager {
                             try {
                                 URL url = new URI(schematicEntry.url).toURL();
                                 HttpURLConnection con = download(player, url);
-                                
+
                                 Files.write(file.toPath(), con.getInputStream().readAllBytes());
-                                
+
                                 mayLoad = true;
                                 PlaceDownloaderClient.LOGGER.info((Text.translatable("placedownloader.schematics.downloaded.schematic", schematicEntry.name).getString()));
                             } catch (IOException | URISyntaxException e) {
@@ -126,9 +126,9 @@ public class Manager {
                                 player.sendMessage(Text.translatable("placedownloader.schematics.error", schematicEntry.name, e.getMessage()), false);
                             }
                         }
-                        
+
                         List<Integer> toBeRemoved = new ArrayList<>();
-                        
+
                         List<SchematicPlacement> schematicPlacements = new java.util.ArrayList<>(List.copyOf(SchematicUtils.getPlacements()));
                         if (mayLoad) {
                             schematicPlacements.forEach(placement -> {
@@ -138,12 +138,12 @@ public class Manager {
                                 }
                             });
                         }
-                        
+
                         toBeRemoved.forEach(index -> {
                             int indexToRemove = index;
                             schematicPlacements.remove(indexToRemove);
                         });
-                        
+
                         if (schematicEntry.autoload && (!SchematicUtils.placementExists(schematicEntry.name, schematicPlacements) || mayLoad)) {
                             LitematicaSchematic schematic = SchematicUtils.loadSchematic(new File(PlaceDownloaderClient.PATH).getAbsoluteFile(), schematicEntry.name + "." + schematicEntry.type);
                             SchematicUtils.placeSchematic(schematic, schematicEntry.x, schematicEntry.y, schematicEntry.z, schematicEntry.name);
@@ -155,7 +155,7 @@ public class Manager {
                         player.sendMessage(Text.translatable("placedownloader.schematics.error", serverEntry.name, e.getMessage()), false);
                     }
                 }
-                
+
             });
             mayExecute = true;
             if (hasDownloaded) {
@@ -168,7 +168,7 @@ public class Manager {
             return null;
         });
     }
-    
+
     private static HttpURLConnection download(PlayerEntity player, URL urlServer) throws IOException {
         HttpURLConnection conServer = (HttpURLConnection) urlServer.openConnection();
         conServer.setRequestMethod("GET");

@@ -40,10 +40,10 @@ public abstract class MinecraftClientMixin {
     @Shadow
     @Nullable
     public Screen currentScreen;
-    
+
     @Shadow
     public abstract void setScreen(@Nullable Screen screen);
-    
+
     @Inject(at = @At("TAIL"), method = "setScreen")
     public void setScreen(@Nullable Screen screen, CallbackInfo ci) {
         if (screen instanceof TitleScreen && PrivacyUtils.allowCoords != 0 && PrivacyUtils.allowCoords != 1) {

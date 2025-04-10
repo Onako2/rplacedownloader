@@ -25,7 +25,7 @@ public class SettingsServerEntry {
     public String url;
     @Expose
     public String name;
-    
+
     public SettingsServerEntry(String url, String name) {
         this.url = url;
         this.name = name;

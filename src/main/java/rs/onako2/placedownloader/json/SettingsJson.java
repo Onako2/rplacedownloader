@@ -27,7 +27,7 @@ public class SettingsJson {
     public int version;
     @Expose
     public int privacy;
-    
+
     public SettingsJson(SettingsServerEntry[] servers, int version, int privacy) {
         this.servers = servers;
         this.version = version;

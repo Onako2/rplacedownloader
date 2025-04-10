@@ -30,27 +30,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SchematicUtils {
     public static SchematicPlacementManager placementManager = new SchematicPlacementManager();
-    
+
     public static LitematicaSchematic loadSchematic(File directory, String filename) {
         FileType fileType = FileType.fromName(filename);
         return LitematicaSchematic.createFromFile(directory, filename, fileType);
     }
-    
+
     public static SchematicPlacement placeSchematic(LitematicaSchematic schematic, int x, int y, int z, String name) {
         SchematicPlacement placement = SchematicPlacement.createFor(schematic, new BlockPos(x, y, z), name, true, true);
         placementManager.addSchematicPlacement(placement, true);
         return placement;
     }
-    
+
     public static List<SchematicPlacement> getPlacements() {
         return placementManager.getAllSchematicsPlacements();
     }
-    
+
     public static void removePlacement(SchematicPlacement placement) {
         placement.setEnabled(false);
         placementManager.removeSchematicPlacement(placement, true);
     }
-    
+
     public static boolean placementExists(String name, List<SchematicPlacement> placements) {
         AtomicBoolean exists = new AtomicBoolean(false);
         placements.forEach(placement -> {

@@ -32,7 +32,7 @@ import java.util.Objects;
 public class MixinGlDebug {
     @Unique
     private static final String GL_VENDOR = GL11.glGetString(GL11.GL_VENDOR);
-    
+
     @Inject(method = "info", at = @At("HEAD"), cancellable = true)
     private static void info(int source, int type, int id, int severity, int messageLength, long message, long l, CallbackInfo ci) {
         // Debug Logging has to be off because users trying to fix some issue should have the option to read this
