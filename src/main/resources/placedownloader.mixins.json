@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MinecraftClientMixin",
-    "MixinGlDebug"
+    "MixinGlDebug",
+    "SchematicPlacementManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
