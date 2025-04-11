@@ -52,16 +52,10 @@ public class Manager {
     public static boolean mayExecute = true;
     private static boolean hasDownloaded;
 
-    public static void refresh() {
-
+    public static void forceRefresh() {
         PlayerEntity player = mc.player;
 
         if (player == null) {
-            return;
-        }
-
-        if (!mayExecute) {
-            player.sendMessage(Text.translatable("placedownloader.schematics.busy"), false);
             return;
         }
 
@@ -167,6 +161,16 @@ public class Manager {
             ex.printStackTrace();
             return null;
         });
+    }
+
+    public static void refresh() {
+        PlayerEntity player = mc.player;
+
+        if (!mayExecute) {
+            player.sendMessage(Text.translatable("placedownloader.schematics.busy"), false);
+        } else {
+            forceRefresh();
+        }
     }
 
     private static HttpURLConnection download(PlayerEntity player, URL urlServer) throws IOException {
