@@ -24,6 +24,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.scoreboard.ScoreHolder;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
 import rs.onako2.placedownloader.compat.litematica.SchematicUtils;
 import rs.onako2.placedownloader.json.SchematicEntry;
 import rs.onako2.placedownloader.json.SchematicJson;
@@ -43,6 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static rs.onako2.placedownloader.PlaceDownloaderClient.gson;
 import static rs.onako2.placedownloader.PlaceDownloaderClient.servers;
@@ -124,7 +126,18 @@ public class Manager {
                         List<Integer> toBeRemoved = new ArrayList<>();
 
                         List<SchematicPlacement> schematicPlacements = new java.util.ArrayList<>(List.copyOf(SchematicUtils.getPlacements()));
-                        if (mayLoad) {
+
+                        AtomicBoolean hasCoordsChanges = new AtomicBoolean(false);
+
+                        schematicPlacements.forEach(placement -> {
+                            if (Objects.requireNonNull(placement.getSchematic().getFile()).getName().equals(schematicEntry.name + "." + schematicEntry.type)) {
+                                if (!placement.getOrigin().equals(new BlockPos(schematicEntry.x, schematicEntry.y, schematicEntry.z))) {
+                                    hasCoordsChanges.set(true);
+                                }
+                            }
+                        });
+
+                        if (mayLoad || hasCoordsChanges.get()) {
                             schematicPlacements.forEach(placement -> {
                                 if (placement != null && placement.getName().equals(schematicEntry.name)) {
                                     SchematicUtils.removePlacement(placement);
