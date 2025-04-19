@@ -61,9 +61,9 @@ public class Manager {
             return;
         }
 
-        if (mc.player.clientWorld.getScoreboard().getScoreHolderObjectives(ScoreHolder.fromName("Fortschritt")).isEmpty()) {
-            return;
-        }
+//        if (mc.player.clientWorld.getScoreboard().getScoreHolderObjectives(ScoreHolder.fromName("Fortschritt")).isEmpty()) {
+//            return;
+//        }
 
         hasDownloaded = false;
 
